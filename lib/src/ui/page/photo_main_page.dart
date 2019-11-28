@@ -102,7 +102,8 @@ class _PhotoMainPageState extends State<PhotoMainPage>
   Widget build(BuildContext context) {
     var textStyle = TextStyle(
       color: options.textColor,
-      fontSize: 14.0,
+      fontSize: 16.0,
+      fontWeight: FontWeight.bold,
     );
     return Theme(
       data: Theme.of(context).copyWith(primaryColor: options.themeColor),
@@ -110,6 +111,7 @@ class _PhotoMainPageState extends State<PhotoMainPage>
         style: textStyle,
         child: Scaffold(
           appBar: AppBar(
+            centerTitle: false,
             leading: IconButton(
               icon: Icon(
                 Icons.close,
