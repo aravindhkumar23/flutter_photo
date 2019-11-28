@@ -120,7 +120,8 @@ class _PhotoPreviewPageState extends State<PhotoPreviewPage> {
     var data = Theme.of(context);
     var textStyle = TextStyle(
       color: options.textColor,
-      fontSize: 14.0,
+      fontSize: 16.0,
+      fontWeight: FontWeight.bold
     );
     return Theme(
       data: data.copyWith(
@@ -194,7 +195,7 @@ class _PhotoPreviewPageState extends State<PhotoPreviewPage> {
   Container _buildCheckbox() {
     return Container(
       constraints: BoxConstraints(
-        maxWidth: 150.0,
+        maxWidth: MediaQuery.of(context).size.width * 0.5,
       ),
       child: StreamBuilder<int>(
         builder: (ctx, snapshot) {

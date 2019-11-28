@@ -75,9 +75,22 @@ class CNProvider extends I18nProvider {
 class ENProvider extends I18nProvider {
   const ENProvider() : super._();
 
+  String formatTitleText(Options options) {
+    if (options.pickType == PickType.onlyImage) {
+      return 'Choose Image';
+    }
+    if (options.pickType == PickType.onlyVideo) {
+      return 'Choose Video';
+    }
+    if (options.pickType == PickType.all) {
+      return 'Gallery';
+    }
+    return '';
+  }
+
   @override
   String getTitleText(Options options) {
-    return "Image Picker";
+    return formatTitleText(options);
   }
 
   @override
