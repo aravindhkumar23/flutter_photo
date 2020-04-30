@@ -13,6 +13,10 @@ class ImageLruCache {
   static void setData(AssetEntity entity, int size, Uint8List list) {
     _map.put(_ImageCacheEntity(entity, size), list);
   }
+
+  static void clearCache() {
+    _map.clear();
+  }
 }
 
 class _ImageCacheEntity {
@@ -40,7 +44,7 @@ class _ImageCacheEntity {
 typedef EvictionHandler<K, V>(K key, V value);
 
 class LRUMap<K, V> {
-  final LinkedHashMap<K, V> _map = new LinkedHashMap<K, V>();
+  final LinkedHashMap<K, V> _map = LinkedHashMap<K, V>();
   final int _maxSize;
   final EvictionHandler<K, V> _handler;
 
@@ -68,5 +72,9 @@ class LRUMap<K, V> {
 
   void remove(K key) {
     _map.remove(key);
+  }
+
+  void clear() {
+    _map.clear();
   }
 }

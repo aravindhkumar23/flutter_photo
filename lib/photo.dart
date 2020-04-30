@@ -3,6 +3,7 @@ library photo;
 import 'dart:async';
 
 import 'package:flutter/material.dart';
+import 'package:photo/src/engine/lru_cache.dart';
 
 import 'package:photo_manager/photo_manager.dart';
 
@@ -32,6 +33,16 @@ class PhotoPicker {
     return _instance;
   }
 
+  /// Clear memory Lru cache.
+  ///
+  /// Suitable for the following scenarios:
+  ///
+  /// 1. The app's memory is tight.
+  /// 2. When the resources was modified, all the thumbnails are no longer as expected.
+  static void clearThumbMemoryCache() {
+    ImageLruCache.clearCache();
+  }
+
   static const String rootRouteName = "photo_picker_image";
 
   /// 没有授予权限的时候,会开启一个dialog去帮助用户去应用设置页面开启权限
@@ -46,6 +57,8 @@ class PhotoPicker {
   ///
   ///   [photoPathList] 一旦设置 则 [pickType]参数无效
   ///
+  ///   [pickedAssetList] 已选择的asset
+  ///
   /// 关于参数可以查看readme文档介绍
   ///
   /// if user not grand permission, then return null and show a dialog to help user open setting.
@@ -58,6 +71,8 @@ class PhotoPicker {
   ///   when user cancel selected,result is empty list
   ///
   ///   when [photoPathList] is not null , [pickType] invalid
+  ///
+  ///   [pickedAssetList]: The results of the last selection can be passed in for easy secondary selection.
   ///
   /// params see readme.md
   static Future<List<AssetEntity>> pickAsset({
@@ -78,6 +93,7 @@ class PhotoPicker {
     PickType pickType = PickType.all,
     BadgeDelegate badgeDelegate = const DefaultBadgeDelegate(),
     List<AssetPathEntity> photoPathList,
+    List<AssetEntity> pickedAssetList,
   }) {
     assert(provider != null, "provider must be not null");
     assert(context != null, "context must be not null");
@@ -115,6 +131,7 @@ class PhotoPicker {
       options,
       provider,
       photoPathList,
+      pickedAssetList,
     );
   }
 
@@ -123,6 +140,7 @@ class PhotoPicker {
     Options options,
     I18nProvider provider,
     List<AssetPathEntity> photoList,
+    List<AssetEntity> pickedAssetList,
   ) async {
     var requestPermission = await PhotoManager.requestPermission();
     if (requestPermission != true) {
@@ -138,7 +156,13 @@ class PhotoPicker {
       return null;
     }
 
-    return _openGalleryContentPage(context, options, provider, photoList);
+    return _openGalleryContentPage(
+      context,
+      options,
+      provider,
+      photoList,
+      pickedAssetList,
+    );
   }
 
   Future<List<AssetEntity>> _openGalleryContentPage(
@@ -146,6 +170,7 @@ class PhotoPicker {
     Options options,
     I18nProvider provider,
     List<AssetPathEntity> photoList,
+    List<AssetEntity> pickedAssetList,
   ) async {
     return Navigator.of(context, rootNavigator: true).push(
       MaterialPageRoute(
@@ -153,6 +178,7 @@ class PhotoPicker {
           options: options,
           provider: provider,
           photoList: photoList,
+          pickedAssetList: pickedAssetList,
         ),
       ),
     );

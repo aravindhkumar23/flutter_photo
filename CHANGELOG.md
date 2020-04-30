@@ -1,5 +1,42 @@
 # CHANGELOG
 
+## 0.5.0-dev.3
+
+Fix:
+
+video type error.
+
+Feature:
+
+Clear memory cache.
+
+## 0.5.0-dev.2
+
+- Rollback photo_manager
+
+Fix:
+
+- no selected text
+
+## 0.4.8
+
+- Rollback photo_manager
+
+Fix:
+
+- pickedAssetList error
+
+## 0.4.7
+
+- Rollback photo_manager.
+- Add `pickedAssetList` for `pickAsset`.
+
+## 0.4.5+1
+
+Fix:
+
+- `photoPathList` of `PhotoPicker.pickAsset`.
+
 ## 0.4.5
 
 Rollback `photo_manager` to `0.4.5`.
