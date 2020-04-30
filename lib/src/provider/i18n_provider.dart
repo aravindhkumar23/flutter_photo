@@ -111,7 +111,9 @@ class ENProvider extends I18nProvider {
 
   @override
   String getSureText(Options options, int currentCount) {
-    return "Save ($currentCount/${options.maxSelected})";
+    return options.maxSelected == 1
+        ? 'Send'
+        : "Send ($currentCount/${options.maxSelected})";
   }
 
   @override

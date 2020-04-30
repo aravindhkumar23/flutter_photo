@@ -17,6 +17,7 @@ import 'package:photo/src/ui/page/photo_preview_page.dart';
 import 'package:photo_manager/photo_manager.dart';
 
 part './main/bottom_widget.dart';
+
 part './main/image_item.dart';
 
 class PhotoMainPage extends StatefulWidget {
@@ -40,6 +41,7 @@ class _PhotoMainPageState extends State<PhotoMainPage>
   Options get options => widget.options;
 
   I18nProvider get i18nProvider => PhotoPickerProvider.of(context).provider;
+
   AssetProvider get assetProvider =>
       PhotoPickerProvider.of(context).assetProvider;
 
@@ -292,7 +294,13 @@ class _PhotoMainPageState extends State<PhotoMainPage>
     var data = list[index];
     return RepaintBoundary(
       child: GestureDetector(
-        onTap: () => _onItemClick(data, index),
+        //disable preview page view
+//        onTap: () => _onItemClick(data, index),
+        //enable selection
+        onTap: () {
+          var currentSelected = containsEntity(data);
+          changeCheck(!currentSelected, data);
+        },
         child: Stack(
           children: <Widget>[
             ImageItem(

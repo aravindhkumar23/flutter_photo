@@ -63,22 +63,23 @@ class __BottomWidgetState extends State<_BottomWidget> {
               Expanded(
                 child: Container(),
               ),
-              FlatButton(
-                onPressed: widget.onTapPreview,
-                textColor: options.textColor,
-                splashColor: Colors.transparent,
-                disabledTextColor: options.disableColor,
-                child: Container(
-                  height: 44.0,
-                  alignment: Alignment.center,
-                  child: Text(
-                    i18nProvider.getPreviewText(
-                        options, widget.selectedProvider),
-                    style: textStyle,
-                  ),
-                  padding: textPadding,
-                ),
-              ),
+//remove preview button from thumbnail page
+//              FlatButton(
+//                onPressed: widget.onTapPreview,
+//                textColor: options.textColor,
+//                splashColor: Colors.transparent,
+//                disabledTextColor: options.disableColor,
+//                child: Container(
+//                  height: 44.0,
+//                  alignment: Alignment.center,
+//                  child: Text(
+//                    i18nProvider.getPreviewText(
+//                        options, widget.selectedProvider),
+//                    style: textStyle,
+//                  ),
+//                  padding: textPadding,
+//                ),
+//              ),
             ],
           ),
         ),
